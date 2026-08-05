@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,17 +16,29 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
+
+import { float64ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
-* Subtract a scalar constant from each element in an input one-dimensional double-precision floating-point ndarray and assign the results to elements in a one-dimensional double-precision floating-point output ndarray.
+* Subtracts a scalar constant from each element in an input one-dimensional double-precision floating-point ndarray and assigns the results to elements in a one-dimensional double-precision floating-point output ndarray.
 *
-* @module @stdlib/blas-ext-base-ndarray-dwxsa
+* ## Notes
+*
+* -   The function expects the following ndarrays:
+*
+*     -   a one-dimensional input ndarray.
+*     -   a one-dimensional output ndarray.
+*     -   a zero-dimensional ndarray containing the scalar constant to subtract.
+*
+* @param arrays - array-like object containing ndarrays
+* @returns output ndarray
 *
 * @example
 * var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
 * var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
-* var dwxsa = require( '@stdlib/blas-ext-base-ndarray-dwxsa' );
 *
 * var x = new Float64Vector( [ -2.0, 1.0, 3.0, -5.0 ] );
 * var w = new Float64Vector( [ 0.0, 0.0, 0.0, 0.0 ] );
@@ -38,12 +50,9 @@
 * var out = dwxsa( [ x, w, alpha ] );
 * // returns <ndarray>[ -7.0, -4.0, -2.0, -10.0 ]
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function dwxsa( arrays: [ float64ndarray, float64ndarray, typedndarray<number> ] ): float64ndarray;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = dwxsa;
