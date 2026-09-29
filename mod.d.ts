@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,10 +16,11 @@
 * limitations under the License.
 */
 
-#include "stdlib/blas/ext/base/ndarray/dwxsa.h"
-#include "stdlib/blas/ext/base/dwxsa.h"
-#include "stdlib/ndarray/ctor.h"
-#include "stdlib/blas/base/shared.h"
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
+
+import { float64ndarray, typedndarray } from '@stdlib/types/ndarray';
 
 /**
 * Subtracts a scalar constant from each element in an input one-dimensional double-precision floating-point ndarray and assigns the results to elements in a one-dimensional double-precision floating-point output ndarray.
@@ -32,22 +33,26 @@
 *     -   a one-dimensional output ndarray.
 *     -   a zero-dimensional ndarray containing the scalar constant to subtract.
 *
-* @param arrays    list containing ndarrays
+* @param arrays - array-like object containing ndarrays
+* @returns output ndarray
+*
+* @example
+* var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
+* var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
+*
+* var x = new Float64Vector( [ -2.0, 1.0, 3.0, -5.0 ] );
+* var w = new Float64Vector( [ 0.0, 0.0, 0.0, 0.0 ] );
+*
+* var alpha = scalar2ndarray( 5.0, {
+*     'dtype': 'float64'
+* });
+*
+* var out = dwxsa( [ x, w, alpha ] );
+* // returns <ndarray>[ -7.0, -4.0, -2.0, -10.0 ]
 */
-void stdlib_blas_ext_dwxsa( const struct ndarray *arrays[] ) {
-	const struct ndarray *x = arrays[ 0 ];
-	const struct ndarray *w = arrays[ 1 ];
+declare function dwxsa( arrays: [ float64ndarray, float64ndarray, typedndarray<number> ] ): float64ndarray;
 
-	double alpha;
-	stdlib_ndarray_get_float64( arrays[ 2 ], NULL, &alpha );
 
-	const CBLAS_INT N = stdlib_ndarray_dimension( x, 0 );
-	const CBLAS_INT strideX = stdlib_ndarray_stride_elements( x, 0 );
-	const CBLAS_INT offsetX = stdlib_ndarray_offset_elements( x );
-	const CBLAS_INT strideW = stdlib_ndarray_stride_elements( w, 0 );
-	const CBLAS_INT offsetW = stdlib_ndarray_offset_elements( w );
+// EXPORTS //
 
-	const double *dataX = (const double *)stdlib_ndarray_data( x );
-	double *dataW = (double *)stdlib_ndarray_data( w );
-	API_SUFFIX(stdlib_strided_dwxsa_ndarray)( N, alpha, dataX, strideX, offsetX, dataW, strideW, offsetW );
-}
+export = dwxsa;
